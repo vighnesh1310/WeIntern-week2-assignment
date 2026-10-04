@@ -43,140 +43,189 @@
     </header>
     <main>
 
-    <section class="page-header">
+        <section class="page-header">
 
-        <p class="small-title">
-            Contact Us
-        </p>
-
-        <h1>
-            Let's Talk
-        </h1>
-
-        <p>
-            Have a project or requirement?
-            Send us a message.
-        </p>
-
-    </section>
-
-
-    <section class="section contact-section">
-
-        <div class="contact-info">
-
-            <h2>
-                Get in Touch
-            </h2>
-
-            <p>
-                We would be happy to discuss your
-                project requirements.
+            <p class="small-title">
+                Contact Us
             </p>
 
-            <div class="contact-item">
-                <strong>Location</strong>
-                <span>Sangli, Maharashtra</span>
+            <h1>
+                Let's Talk
+            </h1>
+
+            <p>
+                Have a project or requirement?
+                Send us a message.
+            </p>
+
+        </section>
+
+
+        <section class="section contact-section">
+
+            <div class="contact-info">
+
+                <h2>
+                    Get in Touch
+                </h2>
+
+                <p>
+                    We would be happy to discuss your
+                    project requirements.
+                </p>
+
+                <div class="contact-item">
+                    <strong>Location</strong>
+                    <span>Sangli, Maharashtra</span>
+                </div>
+
+                <div class="contact-item">
+                    <strong>Email</strong>
+                    <span>info@nexoratechnology.in</span>
+                </div>
+
+                <div class="contact-item">
+                    <strong>Phone</strong>
+                    <span>+91 00000 00000</span>
+                </div>
+
             </div>
 
-            <div class="contact-item">
-                <strong>Email</strong>
-                <span>info@nexoratechnology.in</span>
+
+            <form id="contactForm" class="contact-form">
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your name"
+                    >
+
+                    <small class="error" id="nameError"></small>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                    >
+
+                    <small class="error" id="emailError"></small>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter your phone number"
+                    >
+
+                    <small class="error" id="phoneError"></small>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="message">
+                        Message
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="5"
+                        placeholder="Write your message"
+                    ></textarea>
+
+                    <small class="error" id="messageError"></small>
+
+                </div>
+
+
+                <button type="submit" class="btn primary-btn">
+                    Send Message
+                </button>
+
+                <p id="successMessage" class="success"></p>
+
+            </form>
+
+        </section>
+
+    </main>
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-about">
+
+                <h3>NEXORA Technology</h3>
+
+                <p>
+                    Practical technology solutions
+                    for growing businesses.
+                </p>
+
             </div>
 
-            <div class="contact-item">
-                <strong>Phone</strong>
-                <span>+91 00000 00000</span>
+
+            <div class="footer-links">
+
+                <h4>Quick Links</h4>
+
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="contact.html">Contact</a>
+
+            </div>
+
+
+            <div class="footer-contact">
+
+                <h4>Contact</h4>
+
+                <p>Sangli, Maharashtra</p>
+                <p>info@nexoratechnology.in</p>
+
             </div>
 
         </div>
 
 
-        <form id="contactForm" class="contact-form">
+        <div class="footer-bottom">
 
-            <div class="form-group">
+            <p>
+                © 2026 NEXORA Technology. All rights reserved.
+            </p>
 
-                <label for="name">
-                    Name
-                </label>
+        </div>
 
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Enter your name"
-                >
-
-                <small class="error" id="nameError"></small>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="email">
-                    Email
-                </label>
-
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="Enter your email"
-                >
-
-                <small class="error" id="emailError"></small>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="phone">
-                    Phone
-                </label>
-
-                <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    placeholder="Enter your phone number"
-                >
-
-                <small class="error" id="phoneError"></small>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="message">
-                    Message
-                </label>
-
-                <textarea
-                    id="message"
-                    name="message"
-                    rows="5"
-                    placeholder="Write your message"
-                ></textarea>
-
-                <small class="error" id="messageError"></small>
-
-            </div>
-
-
-            <button type="submit" class="btn primary-btn">
-                Send Message
-            </button>
-
-            <p id="successMessage" class="success"></p>
-
-        </form>
-
-    </section>
-
-</main>
+    </footer>
 
     <script src="js/script.js"></script>
 </body>
