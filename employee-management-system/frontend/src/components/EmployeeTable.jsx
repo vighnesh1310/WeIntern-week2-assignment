@@ -1,4 +1,4 @@
-function EmployeeTable({ employees }) {
+function EmployeeTable({ employees, onEdit }) {
   return (
     <div className="table-container">
       <table className="employee-table">
@@ -25,13 +25,22 @@ function EmployeeTable({ employees }) {
             employees.map((employee) => (
               <tr key={employee.id}>
                 <td>{employee.id}</td>
+
                 <td>{employee.name}</td>
+
                 <td>{employee.department}</td>
+
                 <td>{employee.role}</td>
-                <td>₹{employee.salary}</td>
+
+                <td>₹{Number(employee.salary).toLocaleString("en-IN")}</td>
+
                 <td>{employee.join_date}</td>
+
                 <td>
-                  <button className="edit-button">
+                  <button
+                    className="edit-button"
+                    onClick={() => onEdit(employee)}
+                  >
                     Edit
                   </button>
 

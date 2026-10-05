@@ -5,7 +5,8 @@ import EmployeeForm from "./components/EmployeeForm";
 
 import {
   getEmployees,
-  createEmployee
+  createEmployee,
+  updateEmployee
 } from "./services/employeeApi";
 
 import "./App.css";
@@ -15,6 +16,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   useEffect(() => {
     loadEmployees();
@@ -36,6 +38,16 @@ function App() {
     }
   };
 
+  const handleAddClick = () => {
+    setSelectedEmployee(null);
+    setShowForm(true);
+  };
+
+  const handleEdit = (employee) => {
+    setSelectedEmployee(employee);
+    setShowForm(true);
+  };
+
   const handleEmployeeAdded = async (employee) => {
     try {
       const response = await createEmployee(employee);
@@ -46,6 +58,7 @@ function App() {
       ]);
 
       setShowForm(false);
+      setSelectedEmployee(null);
     } catch (error) {
       console.error(error);
 
@@ -59,6 +72,36 @@ function App() {
     }
   };
 
+  const handleEmployeeUpdated = async (id, employee) => {
+    try {
+      const response = await updateEmployee(id, employee);
+
+      setEmployees((previousEmployees) =>
+        previousEmployees.map((item) =>
+          item.id === id ? response.employee : item
+        )
+      );
+
+      setShowForm(false);
+      setSelectedEmployee(null);
+    } catch (error) {
+      console.error(error);
+
+      const message =
+        error.response?.data?.message ||
+        "Failed to update employee";
+
+      alert(message);
+
+      throw error;
+    }
+  };
+
+  const handleCancel = () => {
+    setShowForm(false);
+    setSelectedEmployee(null);
+  };
+
   return (
     <div className="app">
       <header className="header">
@@ -70,7 +113,7 @@ function App() {
         {!showForm && (
           <button
             className="add-button"
-            onClick={() => setShowForm(true)}
+            onClick={handleAddClick}
           >
             Add Employee
           </button>
@@ -80,13 +123,16 @@ function App() {
       <main className="main-content">
         {showForm ? (
           <EmployeeForm
+            employee={selectedEmployee}
             onEmployeeAdded={handleEmployeeAdded}
-            onCancel={() => setShowForm(false)}
+            onEmployeeUpdated={handleEmployeeUpdated}
+            onCancel={handleCancel}
           />
         ) : (
           <>
             <div className="page-heading">
               <h2>Employees</h2>
+
               <p>
                 View and manage all employee records.
               </p>
@@ -105,7 +151,10 @@ function App() {
             )}
 
             {!loading && !error && (
-              <EmployeeTable employees={employees} />
+              <EmployeeTable
+                employees={employees}
+                onEdit={handleEdit}
+              />
             )}
           </>
         )}

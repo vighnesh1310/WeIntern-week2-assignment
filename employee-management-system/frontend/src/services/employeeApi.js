@@ -23,3 +23,17 @@ export const createEmployee = async (employee) => {
     throw error;
   }
 };
+
+export const updateEmployee = async (id, employee) => {
+  try {
+    const response = await axios.put(
+      `${API_URL}/${id}`,
+      employee
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Error updating employee:", error);
+    throw error;
+  }
+};

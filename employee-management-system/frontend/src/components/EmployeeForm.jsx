@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function EmployeeForm({ onEmployeeAdded, onCancel }) {
+function EmployeeForm({
+  employee,
+  onEmployeeAdded,
+  onEmployeeUpdated,
+  onCancel
+}) {
   const [formData, setFormData] = useState({
     name: "",
     department: "",
@@ -11,6 +16,32 @@ function EmployeeForm({ onEmployeeAdded, onCancel }) {
 
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
+
+  const isEditMode = Boolean(employee);
+
+  useEffect(() => {
+    if (employee) {
+      setFormData({
+        name: employee.name || "",
+        department: employee.department || "",
+        role: employee.role || "",
+        salary: employee.salary || "",
+        join_date: employee.join_date
+          ? employee.join_date.substring(0, 10)
+          : ""
+      });
+    } else {
+      setFormData({
+        name: "",
+        department: "",
+        role: "",
+        salary: "",
+        join_date: ""
+      });
+    }
+
+    setErrors({});
+  }, [employee]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -67,23 +98,19 @@ function EmployeeForm({ onEmployeeAdded, onCancel }) {
     try {
       setSubmitting(true);
 
-      await onEmployeeAdded({
+      const employeeData = {
         name: formData.name.trim(),
         department: formData.department.trim(),
         role: formData.role.trim(),
         salary: Number(formData.salary),
         join_date: formData.join_date
-      });
+      };
 
-      setFormData({
-        name: "",
-        department: "",
-        role: "",
-        salary: "",
-        join_date: ""
-      });
-
-      setErrors({});
+      if (isEditMode) {
+        await onEmployeeUpdated(employee.id, employeeData);
+      } else {
+        await onEmployeeAdded(employeeData);
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -95,8 +122,15 @@ function EmployeeForm({ onEmployeeAdded, onCancel }) {
     <div className="form-card">
       <div className="form-header">
         <div>
-          <h2>Add Employee</h2>
-          <p>Enter the employee details below.</p>
+          <h2>
+            {isEditMode ? "Edit Employee" : "Add Employee"}
+          </h2>
+
+          <p>
+            {isEditMode
+              ? "Update the employee details below."
+              : "Enter the employee details below."}
+          </p>
         </div>
       </div>
 
@@ -115,7 +149,9 @@ function EmployeeForm({ onEmployeeAdded, onCancel }) {
             />
 
             {errors.name && (
-              <span className="field-error">{errors.name}</span>
+              <span className="field-error">
+                {errors.name}
+              </span>
             )}
           </div>
 
@@ -151,7 +187,9 @@ function EmployeeForm({ onEmployeeAdded, onCancel }) {
             />
 
             {errors.role && (
-              <span className="field-error">{errors.role}</span>
+              <span className="field-error">
+                {errors.role}
+              </span>
             )}
           </div>
 
@@ -169,7 +207,9 @@ function EmployeeForm({ onEmployeeAdded, onCancel }) {
             />
 
             {errors.salary && (
-              <span className="field-error">{errors.salary}</span>
+              <span className="field-error">
+                {errors.salary}
+              </span>
             )}
           </div>
 
@@ -207,7 +247,11 @@ function EmployeeForm({ onEmployeeAdded, onCancel }) {
             className="save-button"
             disabled={submitting}
           >
-            {submitting ? "Saving..." : "Save Employee"}
+            {submitting
+              ? "Saving..."
+              : isEditMode
+                ? "Update Employee"
+                : "Save Employee"}
           </button>
         </div>
       </form>
