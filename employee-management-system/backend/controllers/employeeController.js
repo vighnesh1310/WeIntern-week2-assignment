@@ -145,8 +145,43 @@ const updateEmployee = async (req, res) => {
   }
 };
 
+const deleteEmployee = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Check if employee exists
+    const [existingEmployee] = await pool.query(
+      "SELECT * FROM employees WHERE id = ?",
+      [id]
+    );
+
+    if (existingEmployee.length === 0) {
+      return res.status(404).json({
+        message: "Employee not found"
+      });
+    }
+
+    // Delete employee
+    await pool.query(
+      "DELETE FROM employees WHERE id = ?",
+      [id]
+    );
+
+    res.status(200).json({
+      message: "Employee deleted successfully"
+    });
+  } catch (error) {
+    console.error("Error deleting employee:", error.message);
+
+    res.status(500).json({
+      message: "Failed to delete employee"
+    });
+  }
+};
+
 module.exports = {
   getEmployees,
   createEmployee,
-  updateEmployee
+  updateEmployee,
+  deleteEmployee
 };
