@@ -149,3 +149,21 @@ button {
     white-space: nowrap;
   }
 }
+
+.status-message {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.error-message {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 15px;
+  color: #b91c1c;
+  margin-bottom: 20px;
+}

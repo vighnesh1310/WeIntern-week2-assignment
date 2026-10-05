@@ -1,8 +1,32 @@
+import { useEffect, useState } from "react";
 import EmployeeTable from "./components/EmployeeTable";
+import { getEmployees } from "./services/employeeApi";
 import "./App.css";
 
 function App() {
-  const employees = [];
+  const [employees, setEmployees] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    loadEmployees();
+  }, []);
+
+  const loadEmployees = async () => {
+    try {
+      setLoading(true);
+      setError("");
+
+      const data = await getEmployees();
+
+      setEmployees(data);
+    } catch (error) {
+      console.error(error);
+      setError("Unable to load employees");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="app">
@@ -23,7 +47,21 @@ function App() {
           <p>View and manage all employee records.</p>
         </div>
 
-        <EmployeeTable employees={employees} />
+        {loading && (
+          <div className="status-message">
+            Loading employees...
+          </div>
+        )}
+
+        {error && (
+          <div className="error-message">
+            {error}
+          </div>
+        )}
+
+        {!loading && !error && (
+          <EmployeeTable employees={employees} />
+        )}
       </main>
     </div>
   );
