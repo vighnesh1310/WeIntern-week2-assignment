@@ -265,6 +265,53 @@ button {
   cursor: not-allowed;
 }
 
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .header > div {
+    width: 100%;
+  }
+
+  .add-button {
+    width: 100%;
+  }
+
+  .page-heading h2 {
+    font-size: 20px;
+  }
+
+  .page-heading p {
+    font-size: 13px;
+  }
+
+  .table-container {
+    border-radius: 6px;
+  }
+
+  .employee-table th,
+  .employee-table td {
+    padding: 12px;
+  }
+
+  .form-card {
+    padding: 16px;
+  }
+
+  .form-header h2 {
+    font-size: 20px;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   .header {
     padding: 18px 20px;
