@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import EmployeeTable from "./components/EmployeeTable";
 import EmployeeForm from "./components/EmployeeForm";
 import DeleteModal from "./components/DeleteModal";
+import Notification from "./components/Notification";
 
 import {
   getEmployees,
@@ -19,7 +20,8 @@ function App() {
   const [error, setError] = useState("");
 
   const [showForm, setShowForm] = useState(false);
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [selectedEmployee, setSelectedEmployee] =
+    useState(null);
 
   const [employeeToDelete, setEmployeeToDelete] =
     useState(null);
@@ -29,9 +31,28 @@ function App() {
   const [searchText, setSearchText] = useState("");
   const [sortBy, setSortBy] = useState("default");
 
+  const [notification, setNotification] = useState({
+    type: "",
+    message: ""
+  });
+
   useEffect(() => {
     loadEmployees();
   }, []);
+
+  const showNotification = (type, message) => {
+    setNotification({
+      type,
+      message
+    });
+
+    setTimeout(() => {
+      setNotification({
+        type: "",
+        message: ""
+      });
+    }, 3000);
+  };
 
   const loadEmployees = async () => {
     try {
@@ -44,6 +65,11 @@ function App() {
     } catch (error) {
       console.error(error);
       setError("Unable to load employees");
+
+      showNotification(
+        "error",
+        "Unable to load employees"
+      );
     } finally {
       setLoading(false);
     }
@@ -70,6 +96,11 @@ function App() {
 
       setShowForm(false);
       setSelectedEmployee(null);
+
+      showNotification(
+        "success",
+        "Employee added successfully"
+      );
     } catch (error) {
       console.error(error);
 
@@ -77,7 +108,7 @@ function App() {
         error.response?.data?.message ||
         "Failed to create employee";
 
-      alert(message);
+      showNotification("error", message);
 
       throw error;
     }
@@ -103,6 +134,11 @@ function App() {
 
       setShowForm(false);
       setSelectedEmployee(null);
+
+      showNotification(
+        "success",
+        "Employee updated successfully"
+      );
     } catch (error) {
       console.error(error);
 
@@ -110,7 +146,7 @@ function App() {
         error.response?.data?.message ||
         "Failed to update employee";
 
-      alert(message);
+      showNotification("error", message);
 
       throw error;
     }
@@ -138,6 +174,11 @@ function App() {
       );
 
       setEmployeeToDelete(null);
+
+      showNotification(
+        "success",
+        "Employee deleted successfully"
+      );
     } catch (error) {
       console.error(error);
 
@@ -145,7 +186,7 @@ function App() {
         error.response?.data?.message ||
         "Failed to delete employee";
 
-      alert(message);
+      showNotification("error", message);
     } finally {
       setDeleting(false);
     }
@@ -157,39 +198,48 @@ function App() {
   };
 
   const filteredEmployees = employees
-  .filter((employee) => {
-    const search = searchText.toLowerCase().trim();
-
-    if (!search) {
-      return true;
-    }
-
-    return (
-      employee.name.toLowerCase().includes(search) ||
-      employee.department
+    .filter((employee) => {
+      const search = searchText
         .toLowerCase()
-        .includes(search) ||
-      employee.role.toLowerCase().includes(search)
-    );
-  })
-  .sort((a, b) => {
-    if (sortBy === "name") {
-      return a.name.localeCompare(b.name);
-    }
+        .trim();
 
-    if (sortBy === "salary") {
-      return Number(b.salary) - Number(a.salary);
-    }
+      if (!search) {
+        return true;
+      }
 
-    if (sortBy === "join_date") {
       return (
-        new Date(b.join_date) -
-        new Date(a.join_date)
+        employee.name
+          .toLowerCase()
+          .includes(search) ||
+        employee.department
+          .toLowerCase()
+          .includes(search) ||
+        employee.role
+          .toLowerCase()
+          .includes(search)
       );
-    }
+    })
+    .sort((a, b) => {
+      if (sortBy === "name") {
+        return a.name.localeCompare(b.name);
+      }
 
-    return 0;
-  });
+      if (sortBy === "salary") {
+        return (
+          Number(b.salary) -
+          Number(a.salary)
+        );
+      }
+
+      if (sortBy === "join_date") {
+        return (
+          new Date(b.join_date) -
+          new Date(a.join_date)
+        );
+      }
+
+      return 0;
+    });
 
   return (
     <div className="app">
@@ -209,12 +259,25 @@ function App() {
         )}
       </header>
 
+      <Notification
+        type={notification.type}
+        message={notification.message}
+        onClose={() =>
+          setNotification({
+            type: "",
+            message: ""
+          })
+        }
+      />
+
       <main className="main-content">
         {showForm ? (
           <EmployeeForm
             employee={selectedEmployee}
             onEmployeeAdded={handleEmployeeAdded}
-            onEmployeeUpdated={handleEmployeeUpdated}
+            onEmployeeUpdated={
+              handleEmployeeUpdated
+            }
             onCancel={handleCancel}
           />
         ) : (
@@ -229,26 +292,36 @@ function App() {
 
             {loading && (
               <div className="status-message">
-                Loading employees...
+                <div className="loader"></div>
+                <span>
+                  Loading employees...
+                </span>
               </div>
             )}
 
             {error && (
               <div className="error-message">
-                {error}
+                <p>{error}</p>
+
+                <button
+                  className="retry-button"
+                  onClick={loadEmployees}
+                >
+                  Try Again
+                </button>
               </div>
             )}
 
             {!loading && !error && (
               <EmployeeTable
-              employees={filteredEmployees}
-              onEdit={handleEdit}
-              onDelete={handleDeleteClick}
-              searchText={searchText}
-              onSearchChange={setSearchText}
-              sortBy={sortBy}
-              onSortChange={setSortBy}
-            />
+                employees={filteredEmployees}
+                onEdit={handleEdit}
+                onDelete={handleDeleteClick}
+                searchText={searchText}
+                onSearchChange={setSearchText}
+                sortBy={sortBy}
+                onSortChange={setSortBy}
+              />
             )}
           </>
         )}
@@ -257,7 +330,9 @@ function App() {
       <DeleteModal
         employee={employeeToDelete}
         onConfirm={handleDeleteConfirm}
-        onCancel={() => setEmployeeToDelete(null)}
+        onCancel={() =>
+          setEmployeeToDelete(null)
+        }
         deleting={deleting}
       />
     </div>
