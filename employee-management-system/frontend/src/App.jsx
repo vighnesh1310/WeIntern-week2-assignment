@@ -26,6 +26,9 @@ function App() {
 
   const [deleting, setDeleting] = useState(false);
 
+  const [searchText, setSearchText] = useState("");
+  const [sortBy, setSortBy] = useState("default");
+
   useEffect(() => {
     loadEmployees();
   }, []);
@@ -153,6 +156,41 @@ function App() {
     setSelectedEmployee(null);
   };
 
+  const filteredEmployees = employees
+  .filter((employee) => {
+    const search = searchText.toLowerCase().trim();
+
+    if (!search) {
+      return true;
+    }
+
+    return (
+      employee.name.toLowerCase().includes(search) ||
+      employee.department
+        .toLowerCase()
+        .includes(search) ||
+      employee.role.toLowerCase().includes(search)
+    );
+  })
+  .sort((a, b) => {
+    if (sortBy === "name") {
+      return a.name.localeCompare(b.name);
+    }
+
+    if (sortBy === "salary") {
+      return Number(b.salary) - Number(a.salary);
+    }
+
+    if (sortBy === "join_date") {
+      return (
+        new Date(b.join_date) -
+        new Date(a.join_date)
+      );
+    }
+
+    return 0;
+  });
+
   return (
     <div className="app">
       <header className="header">
@@ -203,10 +241,14 @@ function App() {
 
             {!loading && !error && (
               <EmployeeTable
-                employees={employees}
-                onEdit={handleEdit}
-                onDelete={handleDeleteClick}
-              />
+              employees={filteredEmployees}
+              onEdit={handleEdit}
+              onDelete={handleDeleteClick}
+              searchText={searchText}
+              onSearchChange={setSearchText}
+              sortBy={sortBy}
+              onSortChange={setSortBy}
+            />
             )}
           </>
         )}
