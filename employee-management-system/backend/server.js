@@ -3,6 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const pool = require("./config/db");
+const employeeRoutes = require("./routes/employeeRoutes");
 
 const app = express();
 
@@ -31,6 +32,8 @@ app.get("/api/test-db", async (req, res) => {
     });
   }
 });
+
+app.use("/api/employees", employeeRoutes);
 
 const PORT = process.env.PORT || 5000;
 
