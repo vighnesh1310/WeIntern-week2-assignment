@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 
 import EmployeeTable from "./components/EmployeeTable";
 import EmployeeForm from "./components/EmployeeForm";
+import DeleteModal from "./components/DeleteModal";
 
 import {
   getEmployees,
   createEmployee,
-  updateEmployee
+  updateEmployee,
+  deleteEmployee
 } from "./services/employeeApi";
 
 import "./App.css";
@@ -15,8 +17,14 @@ function App() {
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
   const [showForm, setShowForm] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+  const [employeeToDelete, setEmployeeToDelete] =
+    useState(null);
+
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     loadEmployees();
@@ -72,13 +80,21 @@ function App() {
     }
   };
 
-  const handleEmployeeUpdated = async (id, employee) => {
+  const handleEmployeeUpdated = async (
+    id,
+    employee
+  ) => {
     try {
-      const response = await updateEmployee(id, employee);
+      const response = await updateEmployee(
+        id,
+        employee
+      );
 
       setEmployees((previousEmployees) =>
         previousEmployees.map((item) =>
-          item.id === id ? response.employee : item
+          item.id === id
+            ? response.employee
+            : item
         )
       );
 
@@ -94,6 +110,41 @@ function App() {
       alert(message);
 
       throw error;
+    }
+  };
+
+  const handleDeleteClick = (employee) => {
+    setEmployeeToDelete(employee);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!employeeToDelete) {
+      return;
+    }
+
+    try {
+      setDeleting(true);
+
+      await deleteEmployee(employeeToDelete.id);
+
+      setEmployees((previousEmployees) =>
+        previousEmployees.filter(
+          (employee) =>
+            employee.id !== employeeToDelete.id
+        )
+      );
+
+      setEmployeeToDelete(null);
+    } catch (error) {
+      console.error(error);
+
+      const message =
+        error.response?.data?.message ||
+        "Failed to delete employee";
+
+      alert(message);
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -154,11 +205,19 @@ function App() {
               <EmployeeTable
                 employees={employees}
                 onEdit={handleEdit}
+                onDelete={handleDeleteClick}
               />
             )}
           </>
         )}
       </main>
+
+      <DeleteModal
+        employee={employeeToDelete}
+        onConfirm={handleDeleteConfirm}
+        onCancel={() => setEmployeeToDelete(null)}
+        deleting={deleting}
+      />
     </div>
   );
 }

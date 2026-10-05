@@ -1,4 +1,8 @@
-function EmployeeTable({ employees, onEdit }) {
+function EmployeeTable({
+  employees,
+  onEdit,
+  onDelete
+}) {
   return (
     <div className="table-container">
       <table className="employee-table">
@@ -32,7 +36,12 @@ function EmployeeTable({ employees, onEdit }) {
 
                 <td>{employee.role}</td>
 
-                <td>₹{Number(employee.salary).toLocaleString("en-IN")}</td>
+                <td>
+                  ₹
+                  {Number(employee.salary).toLocaleString(
+                    "en-IN"
+                  )}
+                </td>
 
                 <td>{employee.join_date}</td>
 
@@ -44,7 +53,10 @@ function EmployeeTable({ employees, onEdit }) {
                     Edit
                   </button>
 
-                  <button className="delete-button">
+                  <button
+                    className="delete-button"
+                    onClick={() => onDelete(employee)}
+                  >
                     Delete
                   </button>
                 </td>

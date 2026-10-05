@@ -37,3 +37,16 @@ export const updateEmployee = async (id, employee) => {
     throw error;
   }
 };
+
+export const deleteEmployee = async (id) => {
+  try {
+    const response = await axios.delete(
+      `${API_URL}/${id}`
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting employee:", error);
+    throw error;
+  }
+};
