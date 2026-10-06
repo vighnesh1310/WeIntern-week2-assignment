@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const db = require("../config/db");
+const jwt = require("jsonwebtoken");
 
 const register = async (req, res) => {
     try {
@@ -62,6 +63,68 @@ const register = async (req, res) => {
     }
 };
 
+const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({
+                message: "Email and password are required"
+            });
+        }
+
+        const sql = "SELECT * FROM users WHERE email = ?";
+
+        db.query(sql, [email], async (err, results) => {
+            if (err) {
+                return res.status(500).json({
+                    message: "Database error"
+                });
+            }
+
+            if (results.length === 0) {
+                return res.status(401).json({
+                    message: "Invalid email or password"
+                });
+            }
+
+            const user = results[0];
+
+            const passwordMatch = await bcrypt.compare(
+                password,
+                user.password
+            );
+
+            if (!passwordMatch) {
+                return res.status(401).json({
+                    message: "Invalid email or password"
+                });
+            }
+
+            const token = jwt.sign(
+                {
+                    id: user.id,
+                    email: user.email
+                },
+                process.env.JWT_SECRET,
+                {
+                    expiresIn: "1h"
+                }
+            );
+
+            res.json({
+                message: "Login successful",
+                token
+            });
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "Something went wrong"
+        });
+    }
+};
+
 module.exports = {
-    register
+    register,
+    login
 };
