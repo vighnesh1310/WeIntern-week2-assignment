@@ -3,230 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Contact | NEXORA Technology</title>
-
+    <title>Contact Us | NEXORA Technology</title>
+    <meta name="description" content="Get in touch with NEXORA Technology in Sangli, Maharashtra for web development, software consulting, and tech support.">
+    
+    <!-- Google Font: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
+
+    <!-- Header & Navigation -->
     <header class="header">
         <nav class="navbar">
-
-            <a href="index.html" class="logo">
-                NEXORA Technology
+            <a href="index.html" class="logo" aria-label="NEXORA Technology Home">
+                <span class="logo-icon">N</span>
+                <span class="logo-text">NEXORA <span>Tech</span></span>
             </a>
 
-            <button class="menu-toggle" id="menuToggle">
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
                 ☰
             </button>
 
             <ul class="nav-links" id="navLinks">
-                <li>
-                    <a href="index.html">Home</a>
-                </li>
-
-                <li>
-                    <a href="about.html">About</a>
-                </li>
-
-                <li>
-                    <a href="services.html">Services</a>
-                </li>
-
-                <li>
-                    <a href="contact.html">Contact</a>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li class="nav-cta">
+                    <a href="contact.html" class="btn primary-btn" style="padding: 8px 18px; font-size: 14px;">Get in Touch</a>
                 </li>
             </ul>
-
         </nav>
     </header>
+
     <main>
-
+        <!-- Page Header -->
         <section class="page-header">
-
-            <p class="small-title">
-                Contact Us
-            </p>
-
-            <h1>
-                Let's Talk
-            </h1>
-
+            <div class="badge-tag">Let's Connect</div>
+            <h1>Get In Touch With Us</h1>
             <p>
-                Have a project or requirement?
-                Send us a message.
+                Have a project in mind or need technical guidance? Reach out today, and our team in Sangli will respond within 24 hours.
             </p>
-
         </section>
 
+        <!-- Contact Section -->
+        <section class="section">
+            <div class="contact-section">
+                <!-- Contact Info Card -->
+                <div class="contact-info">
+                    <h2>Reach Out Directly</h2>
+                    <p>
+                        We are here to answer questions, discuss project scopes, and help you choose the best technology roadmap.
+                    </p>
 
-        <section class="section contact-section">
+                    <div class="contact-list">
+                        <div class="contact-item">
+                            <div class="contact-item-icon">📍</div>
+                            <div>
+                                <strong>Office Location</strong>
+                                <span>Sangli, Maharashtra - 416416, India</span>
+                            </div>
+                        </div>
 
-            <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-item-icon">✉️</div>
+                            <div>
+                                <strong>Email Address</strong>
+                                <span><a href="mailto:info@nexoratechnology.in">info@nexoratechnology.in</a></span>
+                            </div>
+                        </div>
 
-                <h2>
-                    Get in Touch
-                </h2>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">📞</div>
+                            <div>
+                                <strong>Phone Number</strong>
+                                <span><a href="tel:+910000000000">+91 (000) 000-0000</a></span>
+                            </div>
+                        </div>
 
-                <p>
-                    We would be happy to discuss your
-                    project requirements.
-                </p>
-
-                <div class="contact-item">
-                    <strong>Location</strong>
-                    <span>Sangli, Maharashtra</span>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">⏰</div>
+                            <div>
+                                <strong>Working Hours</strong>
+                                <span>Monday – Saturday: 9:30 AM – 6:30 PM IST</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="contact-item">
-                    <strong>Email</strong>
-                    <span>info@nexoratechnology.in</span>
-                </div>
+                <!-- Contact Form -->
+                <form id="contactForm" class="contact-form" novalidate>
+                    <h3 style="font-size: 22px; margin-bottom: 20px;">Send Us a Message</h3>
 
-                <div class="contact-item">
-                    <strong>Phone</strong>
-                    <span>+91 00000 00000</span>
-                </div>
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="e.g. Rahul Sharma"
+                            autocomplete="name"
+                        >
+                        <small class="error" id="nameError"></small>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="e.g. rahul@example.com"
+                            autocomplete="email"
+                        >
+                        <small class="error" id="emailError"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="e.g. +91 98765 43210"
+                            autocomplete="tel"
+                        >
+                        <small class="error" id="phoneError"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Project Details / Message *</label>
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="5"
+                            placeholder="Briefly describe your project or inquiry..."
+                        ></textarea>
+                        <small class="error" id="messageError"></small>
+                    </div>
+
+                    <button type="submit" class="btn primary-btn" style="width: 100%;">
+                        Submit Message →
+                    </button>
+
+                    <div id="successMessage" class="success"></div>
+                </form>
             </div>
-
-
-            <form id="contactForm" class="contact-form">
-
-                <div class="form-group">
-
-                    <label for="name">
-                        Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        placeholder="Enter your name"
-                    >
-
-                    <small class="error" id="nameError"></small>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="email">
-                        Email
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Enter your email"
-                    >
-
-                    <small class="error" id="emailError"></small>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="phone">
-                        Phone
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        placeholder="Enter your phone number"
-                    >
-
-                    <small class="error" id="phoneError"></small>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="message">
-                        Message
-                    </label>
-
-                    <textarea
-                        id="message"
-                        name="message"
-                        rows="5"
-                        placeholder="Write your message"
-                    ></textarea>
-
-                    <small class="error" id="messageError"></small>
-
-                </div>
-
-
-                <button type="submit" class="btn primary-btn">
-                    Send Message
-                </button>
-
-                <p id="successMessage" class="success"></p>
-
-            </form>
-
         </section>
-
     </main>
+
+    <!-- Footer -->
     <footer class="footer">
-
         <div class="footer-container">
-
             <div class="footer-about">
-
-                <h3>NEXORA Technology</h3>
-
+                <h3><span class="logo-icon" style="width: 28px; height: 28px; font-size: 14px;">N</span> NEXORA Technology</h3>
                 <p>
-                    Practical technology solutions
-                    for growing businesses.
+                    Delivering practical, reliable, and clean technology solutions for growing businesses in Sangli and beyond.
                 </p>
-
             </div>
-
 
             <div class="footer-links">
-
                 <h4>Quick Links</h4>
-
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="services.html">Services</a>
-                <a href="contact.html">Contact</a>
-
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Our Services</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
             </div>
 
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="services.html">Web Development</a></li>
+                    <li><a href="services.html">Custom Software</a></li>
+                    <li><a href="services.html">UI Design</a></li>
+                    <li><a href="services.html">API & Maintenance</a></li>
+                </ul>
+            </div>
 
             <div class="footer-contact">
-
-                <h4>Contact</h4>
-
-                <p>Sangli, Maharashtra</p>
-                <p>info@nexoratechnology.in</p>
-
+                <h4>Contact Info</h4>
+                <p>📍 Sangli, Maharashtra, India</p>
+                <p>✉️ <a href="mailto:info@nexoratechnology.in">info@nexoratechnology.in</a></p>
+                <p>📞 <a href="tel:+910000000000">+91 (000) 000-0000</a></p>
             </div>
-
         </div>
-
 
         <div class="footer-bottom">
-
-            <p>
-                © 2026 NEXORA Technology. All rights reserved.
-            </p>
-
+            <p>© 2026 NEXORA Technology. All rights reserved. Built with clean & modern standards.</p>
         </div>
-
     </footer>
 
+    <!-- JavaScript -->
     <script src="js/script.js"></script>
 </body>
 </html>

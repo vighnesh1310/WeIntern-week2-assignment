@@ -3,192 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Services | NEXORA Technology</title>
-
+    <meta name="description" content="Explore NEXORA Technology's services: Web Development, Custom Software, UI Development, Database Management, and Website Maintenance.">
+    
+    <!-- Google Font: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Main Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
+
+    <!-- Header & Navigation -->
     <header class="header">
         <nav class="navbar">
-
-            <a href="index.html" class="logo">
-                NEXORA Technology
+            <a href="index.html" class="logo" aria-label="NEXORA Technology Home">
+                <span class="logo-icon">N</span>
+                <span class="logo-text">NEXORA <span>Tech</span></span>
             </a>
 
-            <button class="menu-toggle" id="menuToggle">
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
                 ☰
             </button>
 
             <ul class="nav-links" id="navLinks">
-                <li>
-                    <a href="index.html">Home</a>
-                </li>
-
-                <li>
-                    <a href="about.html">About</a>
-                </li>
-
-                <li>
-                    <a href="services.html">Services</a>
-                </li>
-
-                <li>
-                    <a href="contact.html">Contact</a>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="nav-cta">
+                    <a href="contact.html" class="btn primary-btn" style="padding: 8px 18px; font-size: 14px;">Get in Touch</a>
                 </li>
             </ul>
-
         </nav>
     </header>
+
     <main>
-
+        <!-- Page Header -->
         <section class="page-header">
-
-            <p class="small-title">
-                What We Offer
-            </p>
-
-            <h1>
-                Our Services
-            </h1>
-
+            <div class="badge-tag">Our Capabilities</div>
+            <h1>Technology Services & Solutions</h1>
             <p>
-                Technology services for modern businesses.
+                From modern web design to custom software engineering, we deliver reliable solutions engineered for your business success.
             </p>
-
         </section>
 
-
+        <!-- Main Services Grid -->
         <section class="section">
-
             <div class="service-grid">
-
+                <!-- Service 1 -->
                 <div class="service-card">
+                    <div class="card-icon">🌐</div>
                     <h3>Web Development</h3>
                     <p>
-                        Responsive websites built for businesses,
-                        organizations and personal brands.
+                        High-performance, mobile-responsive websites built using clean, modern standards for optimal loading speeds and user engagement.
                     </p>
+                    <ul class="service-card-list">
+                        <li>Custom Business Websites</li>
+                        <li>Mobile & Tablet Responsive</li>
+                        <li>Search Engine Optimization (SEO)</li>
+                        <li>Cross-Browser Compatibility</li>
+                    </ul>
                 </div>
 
-
+                <!-- Service 2 -->
                 <div class="service-card">
-                    <h3>Software Development</h3>
+                    <div class="card-icon">💻</div>
+                    <h3>Custom Software</h3>
                     <p>
-                        Custom software applications designed
-                        according to your business needs.
+                        Tailored business tools and software systems built specifically to automate workflows, manage records, and boost productivity.
                     </p>
+                    <ul class="service-card-list">
+                        <li>Internal Management Portals</li>
+                        <li>Employee & Inventory Systems</li>
+                        <li>Custom Business Logic</li>
+                        <li>Secure Data Handling</li>
+                    </ul>
                 </div>
 
-
+                <!-- Service 3 -->
                 <div class="service-card">
-                    <h3>UI Development</h3>
+                    <div class="card-icon">🎨</div>
+                    <h3>UI & Frontend Design</h3>
                     <p>
-                        Clean and user-friendly interfaces that
-                        work across different screen sizes.
+                        Intuitive, accessible, and elegant user interfaces designed to provide seamless experiences across desktop, tablet, and mobile screens.
                     </p>
+                    <ul class="service-card-list">
+                        <li>Clean & Consistent Layouts</li>
+                        <li>Modern Design Systems</li>
+                        <li>Accessibility Standards</li>
+                        <li>Interactive User Experiences</li>
+                    </ul>
                 </div>
 
-
+                <!-- Service 4 -->
                 <div class="service-card">
+                    <div class="card-icon">🗄️</div>
                     <h3>Database Solutions</h3>
                     <p>
-                        Structured database solutions for
-                        storing and managing business data.
+                        Structured and scalable database schemas designed for safe data storage, rapid querying, and reliable automated backups.
                     </p>
+                    <ul class="service-card-list">
+                        <li>SQL & Relational Databases</li>
+                        <li>Data Schema Architecture</li>
+                        <li>Query Optimization & Speed</li>
+                        <li>Backup & Recovery Planning</li>
+                    </ul>
                 </div>
 
-
+                <!-- Service 5 -->
                 <div class="service-card">
-                    <h3>API Development</h3>
+                    <div class="card-icon">🔌</div>
+                    <h3>API & Integration</h3>
                     <p>
-                        REST APIs that connect applications
-                        and services efficiently.
+                        Connecting your systems with third-party tools, payment gateways, authentication providers, and external services seamlessly.
                     </p>
+                    <ul class="service-card-list">
+                        <li>RESTful API Architecture</li>
+                        <li>Payment Gateway Integration</li>
+                        <li>Third-Party Webhooks</li>
+                        <li>Data Synchronization</li>
+                    </ul>
                 </div>
 
-
+                <!-- Service 6 -->
                 <div class="service-card">
+                    <div class="card-icon">🛠️</div>
                     <h3>Website Maintenance</h3>
                     <p>
-                        Regular updates, improvements and
-                        maintenance for existing websites.
+                        Continuous monitoring, security updates, feature improvements, and on-demand bug fixes to keep your digital assets in top shape.
                     </p>
+                    <ul class="service-card-list">
+                        <li>Regular Security Audits</li>
+                        <li>Performance Tuning</li>
+                        <li>Content & Feature Updates</li>
+                        <li>Dedicated Technical Support</li>
+                    </ul>
                 </div>
-
             </div>
-
         </section>
 
-
-        <section class="cta">
-
-            <h2>
-                Looking for a technology solution?
-            </h2>
-
-            <p>
-                Tell us about your requirement.
-            </p>
-
-            <a href="contact.html" class="btn primary-btn">
-                Contact Us
-            </a>
-
-        </section>
-
-    </main>
-    <footer class="footer">
-
-        <div class="footer-container">
-
-            <div class="footer-about">
-
-                <h3>NEXORA Technology</h3>
-
+        <!-- Tech Stack Section -->
+        <section class="section" style="background-color: var(--bg-subtle); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); text-align: center;">
+            <div class="section-heading">
+                <p class="small-title">Technologies We Use</p>
+                <h2>Built on Proven, Modern Foundations</h2>
                 <p>
-                    Practical technology solutions
-                    for growing businesses.
+                    We choose battle-tested technologies known for speed, security, maintainability, and long-term viability.
                 </p>
-
             </div>
 
+            <div class="tech-badges">
+                <span class="tech-badge">HTML5</span>
+                <span class="tech-badge">CSS3 / Modern Flexbox & Grid</span>
+                <span class="tech-badge">JavaScript (ES6+)</span>
+                <span class="tech-badge">Node.js</span>
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">MySQL / PostgreSQL</span>
+                <span class="tech-badge">REST APIs</span>
+                <span class="tech-badge">Git & Version Control</span>
+            </div>
+        </section>
+
+        <!-- Call to Action Banner -->
+        <section class="cta">
+            <h2>Need a Custom Solution for Your Business?</h2>
+            <p>
+                Tell us about your specific goals and requirements. We will prepare a clear, honest project roadmap.
+            </p>
+            <a href="contact.html" class="btn primary-btn">
+                Request a Free Quote →
+            </a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3><span class="logo-icon" style="width: 28px; height: 28px; font-size: 14px;">N</span> NEXORA Technology</h3>
+                <p>
+                    Delivering practical, reliable, and clean technology solutions for growing businesses in Sangli and beyond.
+                </p>
+            </div>
 
             <div class="footer-links">
-
                 <h4>Quick Links</h4>
-
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="services.html">Services</a>
-                <a href="contact.html">Contact</a>
-
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Our Services</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
             </div>
 
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="services.html">Web Development</a></li>
+                    <li><a href="services.html">Custom Software</a></li>
+                    <li><a href="services.html">UI Design</a></li>
+                    <li><a href="services.html">API & Maintenance</a></li>
+                </ul>
+            </div>
 
             <div class="footer-contact">
-
-                <h4>Contact</h4>
-
-                <p>Sangli, Maharashtra</p>
-                <p>info@nexoratechnology.in</p>
-
+                <h4>Contact Info</h4>
+                <p>📍 Sangli, Maharashtra, India</p>
+                <p>✉️ <a href="mailto:info@nexoratechnology.in">info@nexoratechnology.in</a></p>
+                <p>📞 <a href="tel:+910000000000">+91 (000) 000-0000</a></p>
             </div>
-
         </div>
-
 
         <div class="footer-bottom">
-
-            <p>
-                © 2026 NEXORA Technology. All rights reserved.
-            </p>
-
+            <p>© 2026 NEXORA Technology. All rights reserved. Built with clean & modern standards.</p>
         </div>
-
     </footer>
 
+    <!-- JavaScript -->
     <script src="js/script.js"></script>
 </body>
 </html>
